@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import React, {useCallback, useEffect} from 'react'
+import {useSelector} from 'react-redux'
 import {
 	addTodolistTC,
 	changeTodolistTitleTC,
@@ -8,16 +8,16 @@ import {
 	removeTodolistTC,
 	todolistsActions
 } from 'features/TodolistsList/todolists.reducer'
-import { addTaskTC, removeTaskTC, updateTaskTC } from 'features/TodolistsList/tasks.reducer'
-import { TaskStatuses } from 'api/todolists-api'
-import { Grid, Paper } from '@mui/material'
-import { AddItemForm } from 'components/AddItemForm/AddItemForm'
-import { Todolist } from './Todolist/Todolist'
-import { Navigate } from 'react-router-dom'
-import { useAppDispatch } from 'hooks/useAppDispatch';
-import { selectIsLoggedIn } from 'features/auth/auth.selectors';
-import { selectTasks } from 'features/TodolistsList/tasks.selectors';
-import { selectTodolists } from 'features/TodolistsList/todolists.selectors';
+import {removeTaskTC, tasksActions, tasksThunks, updateTaskTC} from 'features/TodolistsList/tasks.reducer'
+import {TaskStatuses} from 'api/todolists-api'
+import {Grid, Paper} from '@mui/material'
+import {AddItemForm} from 'components/AddItemForm/AddItemForm'
+import {Todolist} from './Todolist/Todolist'
+import {Navigate} from 'react-router-dom'
+import {useAppDispatch} from 'hooks/useAppDispatch';
+import {selectIsLoggedIn} from 'features/auth/auth.selectors';
+import {selectTasks} from 'features/TodolistsList/tasks.selectors';
+import {selectTodolists} from 'features/TodolistsList/todolists.selectors';
 
 type PropsType = {
 	demo?: boolean
@@ -44,7 +44,7 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
 	}, [])
 
 	const addTask = useCallback(function (title: string, todolistId: string) {
-		const thunk = addTaskTC(title, todolistId)
+		const thunk = tasksThunks.addTask({title, todolistId})
 		dispatch(thunk)
 	}, [])
 
